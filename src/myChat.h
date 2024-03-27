@@ -10,6 +10,7 @@ public:
 	{
 		while (true)
 		{
+			std::cout << "Для входа нажмите - 1, для регистрации - 2, для выхода 3: ";
 			int number = getValue();
 			switch (number)
 			{
@@ -18,7 +19,10 @@ public:
 				return;
 			case 2:
 			{
-				NamePassword user;
+				//NamePassword user;
+				//std::shared_ptr<NamePassword> newUser = std::make_shared<NamePassword>();
+				std::unique_ptr<NamePassword> newUser = std::make_unique<NamePassword>();
+				
 			}				
 				return;
 			case 3:
@@ -29,6 +33,33 @@ public:
 			}
 		}
 	}
+
+	//выбор пользователя
+	void user_selection()
+	{
+		while (true)
+		{
+			std::cout << "Кому хотите послать сообщение? ";
+			int number = getValue();
+			if (number < 1 && number > m_data.size())
+			{
+				std::cout << "Такого пользователя не существует!!\n";
+			}
+			else
+			{
+				for (int i = 0; i < m_data.size(); i++)
+				{
+					if (number == i + 1)
+					{
+						std::cout << "Вы пишите - " << m_data[i].m_nickName;
+						m_data[i].m_mail.push_back(writeMessage());
+					}
+					continue;
+				}
+				return;
+			}
+		}	
+ 	}
 
 	//набор сообщения
 	std::string writeMessage()
@@ -50,17 +81,22 @@ private:
 		std::cin >> str;
 		return str;		
 	}
+	
 	int getValue()
-	{
-		std::cout << "Для входа нажмите - 1, для регистрации - 2, для выхода 3: ";
-		int number;
-		std::cin >> number;
-		if (std::cin.fail())
-		{
-			std::cin.clear();
-			std::cin.ignore(32767, '\n');
-		}
-		return number;
+	{		
+		while (true)
+		{		
+			int number = 0;
+			std::cin >> number;
+			if (std::cin.fail())
+			{
+				std::cin.clear();
+				std::cin.ignore(32767, '\n');
+				std::cout << "Веден не верный символ! ";
+			}	
+			else
+			return number;
+		}		
 	}	
 	//функция входа.txt
 	void sign_in() {
@@ -69,7 +105,7 @@ private:
 		std::cin >> buffer_login;
 		for (int i = 0; i < m_data.size(); ++i)
 		{
-			if (m_data[i].m_name == buffer_login)
+			if (m_data[i].m_login == buffer_login)
 			{
 				std::cout << "Enter password:" << std::endl;
 				std::string buffer_password = "";
@@ -78,7 +114,7 @@ private:
 				{
 					if (m_data[j].m_password == buffer_password)
 					{
-						std::cout << m_data[j].m_name << ", welcome!" << std::endl;
+						std::cout << m_data[j].m_nickName << ", welcome!" << std::endl;
 						//срабатывает функция показа сообщений и выбора действий						
 					}
 					else

@@ -7,21 +7,27 @@ int main(int argc, char* argv)
 	setlocale(LC_ALL, "ru");
 	
 	//имена для теста
-	NamePassword sasha("Sasha", "123");
-	NamePassword masha("Masha", "12");
+	NamePassword sasha("Sasha", "123", "Sasha");
+	
+	NamePassword masha("Masha", "12", "Masha");
 
 	//запуск проекта
 	while (true)
 	{				
 		std::cout << "Консольный мессенджер!!" << std::endl;
 		
-		myChat user1;
-		user1.enterChat();
-		user1.writeMessage();
-		std::cout << user1.getOldMessage() << std::endl;
+		std::unique_ptr<myChat> user1 = std::make_unique<myChat>();
+		user1->enterChat();
 
 		//список всех пользователей
 		getPersons();
+		//выбор пользователя
+		user1->user_selection();
+		//набор сообщения
+		//user1->writeMessage();
+
+		std::cout << user1->getOldMessage() << std::endl;
+		
 
 		std::cout << "Хотите продолжить работу с мессенджером?" << std::endl;
 		std::cout << "Если да то нажмите - y, если нет то - n" << std::endl;

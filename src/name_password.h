@@ -10,9 +10,11 @@ struct Persons
 {
 	Persons() { }
 		
-	std::string m_name;
-	std::string m_password;	
+	std::string m_login;
+	std::string m_password;
+	std::string m_nickName;	
 	~Persons() {}
+	std::vector<std::string> m_mail;	
 };
 
 //хранение пользователей
@@ -23,8 +25,9 @@ void getPersons()
 	std::cout << "Зарегестрированных пользователей: " << m_data.size() << std::endl;
 		for (int i = 0; i < m_data.size(); i++)
 		{
-			std::cout << m_data[i].m_name << " ";
+			std::cout << (i + 1) << ")." << m_data[i].m_nickName << " ";
 		}
+		std::cout << "\n";
 	}
 
 //класс регистрации пользователей
@@ -33,19 +36,24 @@ class NamePassword
 public:
 	NamePassword()		
 	{				
-		std::cout << "Введите имя: ";
-		m_user.m_name = getValue();
+		std::cout << "Введите логин: ";
+		m_user.m_login = getValue();
 		std::cout << "\n";
 		std::cout << "Введите пароль: ";
 		m_user.m_password = getValue();
-		std::cout << "\n";		
-
+		std::cout << "\n";	
+		std::cout << "Введите имя: ";
+		m_user.m_nickName = getValue();
+		std::cout << "\n";
+	
 		m_data.push_back(m_user);
 	}
-	NamePassword(const std::string& name, const std::string& password)		
+	NamePassword(const std::string& name, const std::string& password, const std::string nick)
 	{
-		m_user.m_name = name;
+		m_user.m_login = name;
 		m_user.m_password = password;
+		m_user.m_nickName = nick;
+	
 		m_data.push_back(m_user);
 	}
 
@@ -62,7 +70,7 @@ public:
 	{
 		while (true)
 		{
-			std::string str = "";
+			std::string str = "";			
 			std::cin >> str;
 			if (std::cin.fail())
 			{
@@ -76,10 +84,11 @@ public:
 
 	std::string getName()
 	{
-		return m_user.m_name;
+		return m_user.m_nickName;
 	}	
 
 private:
-	Persons m_user;		
+	
+	Persons m_user;
 };
 
