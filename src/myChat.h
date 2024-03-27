@@ -51,7 +51,7 @@ public:
 				{
 					if (number == i + 1)
 					{
-						std::cout << "Вы пишите - " << m_data[i].m_nickName;
+						std::cout << "Вы пишите - " << m_data[i].m_nickName << "\n";
 						m_data[i].m_mail.push_back(writeMessage());
 					}
 					continue;

@@ -5,6 +5,8 @@
 int main(int argc, char* argv)
 {
 	setlocale(LC_ALL, "ru");
+
+	std::cout << "Консольный мессенджер!!" << std::endl;
 	
 	//имена для теста
 	NamePassword sasha("Sasha", "123", "Sasha");
@@ -14,8 +16,6 @@ int main(int argc, char* argv)
 	//запуск проекта
 	while (true)
 	{				
-		std::cout << "Консольный мессенджер!!" << std::endl;
-		
 		std::unique_ptr<myChat> user1 = std::make_unique<myChat>();
 		user1->enterChat();
 
