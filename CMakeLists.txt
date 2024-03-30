@@ -7,8 +7,8 @@ project(${PROJECT_NAME})
 add_executable(${PROJECT_NAME} 
 		src/main.cpp 
 		src/myChat.h 
-		src/myChat.cpp
-		src/user.h
+		src/myChat.cpp 
+		src/user.h 
 		src/myFunctions.h)
 
 target_compile_features(${PROJECT_NAME} PUBLIC cxx_std_17)

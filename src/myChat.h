@@ -16,7 +16,14 @@ public:
 			switch (number)
 			{
 			case 1:
-				sign_in();
+			{
+				bool fl = sign_in();
+				if (fl == false)
+				{
+					std::cout << "Не верный логин или пароль!!" << std::endl;
+					break;
+				}
+			}
 				return;
 			case 2:
 			{				
@@ -98,33 +105,34 @@ private:
 		}		
 	}	
 	//функция входа.txt
-	void sign_in() {
+	bool sign_in() {
 		std::cout << "Enter your login:" << std::endl;
 		std::string buffer_login = "";
 		std::cin >> buffer_login;
+		int count = 0;
 		for (int i = 0; i < m_data.size(); ++i)
 		{
 			if (m_data[i].m_login == buffer_login)
 			{
 				std::cout << "Enter password:" << std::endl;
 				std::string buffer_password = "";
-				std::cin >> buffer_password;
-				for (int j = 0; j < m_data.size(); ++j)
+				std::cin >> buffer_password;				
+				if (m_data[i].m_password == buffer_password)
 				{
-					if (m_data[j].m_password == buffer_password)
-					{
-						std::cout << m_data[j].m_nickName << ", welcome!" << std::endl;
-						//срабатывает функция показа сообщений и выбора действий						
-					}
-					else
-					//	std::cout << "Не правильный пароль!" << std::endl;
-						continue;
-				}
+					//срабатывает функция показа сообщений и выбора действий
+					std::cout << m_data[i].m_nickName << ", welcome!" << std::endl;						
+					++count;
+				}						
+				++count;
 			}
-			else
-				//std::cout << "Не правильный логин!" << std::endl;
-				continue;
+			else				
+				continue;			
 		}
+		if (count != 2)
+		{
+			return false;
+		}
+		return true;
 	}
 	
 	std::vector<std::string> oldMessage;
