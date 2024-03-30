@@ -1,6 +1,7 @@
 #pragma once
 
-#include "name_password.h"
+#include "myFunctions.h"
+#include "user.h"
 
 class myChat
 {
@@ -18,11 +19,8 @@ public:
 				sign_in();
 				return;
 			case 2:
-			{
-				//NamePassword user;
-				//std::shared_ptr<NamePassword> newUser = std::make_shared<NamePassword>();
-				std::unique_ptr<NamePassword> newUser = std::make_unique<NamePassword>();
-				
+			{				
+				std::unique_ptr<UserRegistration1> newUser = std::make_unique<UserRegistration1>();
 			}				
 				return;
 			case 3:
@@ -32,6 +30,7 @@ public:
 				break;
 			}
 		}
+
 	}
 
 	//выбор пользователя
@@ -41,9 +40,9 @@ public:
 		{
 			std::cout << "Кому хотите послать сообщение? ";
 			int number = getValue();
-			if (number < 1 && number > m_data.size())
+			if (number < 1 || number > m_data.size())
 			{
-				std::cout << "Такого пользователя не существует!!\n";
+				std::cout << "Такого пользователя не существует!!\n";				
 			}
 			else
 			{
@@ -76,7 +75,7 @@ public:
 private:
 	std::string getStringValue()
 	{
-		std::cout << "Выедите свое сообщение: ";
+		std::cout << "Введите свое сообщение: ";
 		std::string str = "";
 		std::cin >> str;
 		return str;		
@@ -118,10 +117,12 @@ private:
 						//срабатывает функция показа сообщений и выбора действий						
 					}
 					else
+					//	std::cout << "Не правильный пароль!" << std::endl;
 						continue;
 				}
 			}
 			else
+				//std::cout << "Не правильный логин!" << std::endl;
 				continue;
 		}
 	}
