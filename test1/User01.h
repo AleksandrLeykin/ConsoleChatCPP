@@ -49,7 +49,7 @@ public:
 		string buffer = "";
 		while (true)
 		{
-			getline(cin, buffer);
+			cin >> buffer;
 			if (cin.fail())
 			{
 				cin.clear();
