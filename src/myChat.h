@@ -3,6 +3,7 @@
 #include "myFunctions.h"
 #include "user.h"
 
+
 class myChat
 {
 public:
@@ -66,7 +67,6 @@ public:
 			}
 		}	
  	}
-
 	//набор сообщения
 	std::string writeMessage()
 	{		
@@ -79,12 +79,65 @@ public:
 	{
 		return oldMessage[oldMessage.size() - 1];
 	}
+
+	//меню действий (написать/прочитать)
+	void MenuChoice()
+	{
+		std::cout << "Выберите дейтсвие:\n"
+			<< "1)Ввести сообщение.\t2)Просмотреть сообщения.\t3)Назад.\n";
+		int buffer = getValue();
+		while (true)
+
+		{
+			switch (buffer)
+			{
+			case 1:
+			{
+				std::cout << "1)Личное сообщение.\t2)Всем.\n";
+				int x = getValue();
+				if (x == 1)
+				{
+					user_selection();
+				}
+				else
+				{
+					std::string text = getStringValue();
+					for (int i = 0; i < m_data.size(); ++i)
+					{
+						m_data[i].m_mail.push_back(text);
+					}
+				}
+				return;
+			}
+			case 2:
+			{
+				std::cout << "Зарегестрированных пользователей: " << m_data.size() << std::endl;
+				for (int i = 0; i < m_data.size(); i++)
+				{
+					std::cout << (i + 1) << ")." << m_data[i].m_nickName << " ";
+				}
+				std::cout << "\n";
+				std::cout << "Выберите себя." << std::endl;
+				int temp = getValue() - 1;
+				for (int i = 0; i < m_data[temp].m_mail.size(); ++i)
+				{
+					std::cout << m_data[temp].m_mail[i] << std::endl;
+				}
+				return;
+			}
+			case 3:
+				return;
+			}
+
+		}
+	}
 private:
 	std::string getStringValue()
 	{
 		std::cout << "Введите свое сообщение: ";
 		std::string str = "";
-		std::cin >> str;
+		std::cin.get();
+		getline(std::cin, str);
 		return str;		
 	}
 	
@@ -119,7 +172,6 @@ private:
 				std::cin >> buffer_password;				
 				if (m_data[i].m_password == buffer_password)
 				{
-					//срабатывает функция показа сообщений и выбора действий
 					std::cout << m_data[i].m_nickName << ", welcome!" << std::endl;						
 					++count;
 				}						
@@ -136,4 +188,5 @@ private:
 	}
 	
 	std::vector<std::string> oldMessage;
+	int temp = 0;
 };

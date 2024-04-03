@@ -4,6 +4,7 @@
 #include "user.h"
 
 
+
 //вывод имен пользователей
 void getPersons()
 {
@@ -24,16 +25,11 @@ void startMessengerChat()
 	{
 		std::unique_ptr<myChat> user1 = std::make_unique<myChat>();
 		user1->enterChat();
-
+		
 		//список всех пользователей
 		getPersons();
-		//выбор пользователя
-		user1->user_selection();
-		//набор сообщения
-		//user1->writeMessage();
-
-		std::cout << user1->getOldMessage() << std::endl;
-
+		//развилка либо ввод сообщения, либо просмотр входящих
+		user1->MenuChoice();
 
 		std::cout << "Хотите продолжить работу с мессенджером?" << std::endl;
 		std::cout << "Если да то нажмите - y, если нет то - n" << std::endl;

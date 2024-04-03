@@ -16,7 +16,8 @@ struct Persons
 	std::string m_password;
 	std::string m_nickName;	
 
-	std::vector<std::string> m_mail;	
+	std::vector<std::string> m_mail;
+
 };
 
 //хранение пользователей
@@ -30,35 +31,27 @@ public:
 	{				
 		std::cout << "¬ведите логин: ";
 		m_user.m_login = getValue();
+		cinClear();
 		std::cout << "\n";
 		std::cout << "¬ведите пароль: ";
 		m_user.m_password = getValue();
+		cinClear();
 		std::cout << "\n";	
 		std::cout << "¬ведите им€: ";
 		m_user.m_nickName = getValue();
+		cinClear();
 		std::cout << "\n";
-	
-		m_data.push_back(m_user);
-	}
-	UserRegistration1(const std::string& name, const std::string& password, const std::string nick)
-	{
-		m_user.m_login = name;
-		m_user.m_password = password;
-		m_user.m_nickName = nick;
 	
 		m_data.push_back(m_user);
 	}
 
-	UserRegistration1(const UserRegistration1& other) = delete;
-	UserRegistration1(const UserRegistration1&& other) = delete;
-	UserRegistration1& operator=(const UserRegistration1& other) = delete;
-		
 	~UserRegistration1() {}
 
 	std::string getName()
 	{
 		return m_user.m_nickName;
 	}	
+
 
 private:	
 	Persons m_user;
@@ -78,5 +71,9 @@ private:
 				return str;
 		}
 	}
+	void cinClear()
+	{
+		std::cin.clear();
+		std::cin.ignore(32767, '\n');
+	 }
 };
-

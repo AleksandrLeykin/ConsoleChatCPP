@@ -12,10 +12,6 @@ int main(int argc, char* argv)
 
 	std::cout << "Консольный мессенджер!!" << std::endl;
 	
-	//имена для теста
-	UserRegistration1 sasha("Sasha", "123", "Sasha");
-	UserRegistration1 masha("Masha", "12", "Masha");
-	
 	//запуск проекта(start of the project)
 	startMessengerChat();
 		
