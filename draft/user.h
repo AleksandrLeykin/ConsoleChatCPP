@@ -31,12 +31,15 @@ public:
 	{				
 		std::cout << "¬ведите логин: ";
 		m_user.m_login = getValue();
+		cinClear();
 		std::cout << "\n";
 		std::cout << "¬ведите пароль: ";
 		m_user.m_password = getValue();
+		cinClear();
 		std::cout << "\n";	
 		std::cout << "¬ведите им€: ";
 		m_user.m_nickName = getValue();
+		cinClear();
 		std::cout << "\n";
 	
 		m_data.push_back(m_user);
@@ -68,4 +71,9 @@ private:
 				return str;
 		}
 	}
+	void cinClear()
+	{
+		std::cin.clear();
+		std::cin.ignore(32767, '\n');
+	 }
 };
